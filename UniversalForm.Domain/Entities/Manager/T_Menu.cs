@@ -5,68 +5,55 @@ using System.Text;
 namespace UniversalForm.Domain.Entities.Manager
 {
     /// <summary>
-    /// 管理员表
-    /// author:leoxuan
-    /// data:2018年12月24日 16:50:15
+    /// 菜单表
+    /// author：leoxuan
+    /// data:2018年12月24日 16:06:53
     /// </summary>
-    public class T_Manager : Entity<int>
+    public class T_Menu : Entity<int>
     {
         /// <summary>
-        /// 登录名
+        /// 菜单名称
         /// </summary>
-        public string LoginName { get; set; }
+        public string MenuName { get; set; }
 
         /// <summary>
-        /// 登录密码
-        /// </summary>        
-        public string LoginPwd { get; set; }
-
-        /// <summary>
-        /// 角色Id
+        /// 父级Id
         /// </summary>
-        public int RoleId { get; set; }
+        public int FatherId { get; set; }
 
         /// <summary>
-        /// 头像地址
+        /// 图标地址
         /// </summary>
-        public string Avatar { get; set; }
+        public string IconUrl { get; set; }
 
         /// <summary>
-		/// 用户昵称
-		/// </summary>
-		public String NickName { get; set; }
-
-        /// <summary>
-        /// 手机号码
+        /// 链接地址
         /// </summary>
-        public String Mobile { get; set; }
+        public string LinkUrl { get; set; }
 
         /// <summary>
-        /// 邮箱地址
+        /// 排序值
         /// </summary>
-        public String Email { get; set; }
+        public int? Sort { get; set; }
 
         /// <summary>
-        /// 登录次数
+        /// 操作类型，按钮功能权限使用
         /// </summary>
-        public int? LoginCount { get; set; }
+        public string Permission { get; set; }
 
         /// <summary>
-        /// 最后一次登录IP
-        /// </summary>
-        public String LastLoginIP { get; set; }
-
-        /// <summary>
-		/// 最后一次登录时间
-		/// </summary>
-		public DateTime? LastLoginTime { get; set; }
-
-        /// <summary>
-        /// 是否锁定
+		/// 是否显示
         /// 0 否
         /// 1 是
-        /// </summary>
-        public int IsLock { get; set; }
+		/// </summary>		
+        public int IsDisplay { get; set; }
+
+        /// <summary>
+		/// 是否系统默认
+        /// 0 否
+        /// 1 是
+		/// </summary>
+        public int IsSystem { get; set; }
 
         /// <summary>
         /// 添加人ID
