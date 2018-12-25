@@ -8,6 +8,10 @@ using System.Linq.Expressions;
 
 namespace UniversalForm.EF.Repositories
 {
+    /// <summary>
+    /// author:leoxuan
+    /// data:2018年12月23日
+    /// </summary>
     public class FormRepository : RepositoryBase<T_Form, int>,IFormRepository
     {
         public FormRepository(EFDBContext dbcontext) : base(dbcontext)

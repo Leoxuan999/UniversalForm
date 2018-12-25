@@ -36,7 +36,10 @@ namespace WebApi
 
             //依赖注入
             services.AddScoped<IFormRepository, FormRepository>();
-
+            services.AddScoped<IManagerRepository, ManagerRepository>();
+            services.AddScoped<IManagerRoleRepository, ManagerRoleRepository>();
+            services.AddScoped<IRolePermissionRepository, RolePermissionRepository>();
+            services.AddScoped<IMenuRepository, MenuRepository>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 

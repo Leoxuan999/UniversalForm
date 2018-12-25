@@ -19,9 +19,4 @@ namespace UniversalForm.Domain.Enum
         /// </summary>
         end =2
     }
-
-    public class testState
-    {
-        int s = (int)FormState.start;
-    }
 }

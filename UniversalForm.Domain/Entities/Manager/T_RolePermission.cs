@@ -18,7 +18,7 @@ namespace UniversalForm.Domain.Entities.Manager
         /// <summary>
         /// 角色Id
         /// </summary>
-        public int RoldId { get; set; }
+        public int RoleId { get; set; }
 
         [NotMapped]
         public virtual T_Menu T_Menu { get; set; }
