@@ -12,10 +12,16 @@ namespace WebApi.Controllers
     public class LoginController : Controller
     {
         private readonly IManagerRepository _manager;
+        private readonly IManagerRoleRepository _managerRole;
+        private readonly IMenuRepository _menu;
+        private readonly IRolePermissionRepository _rolePermission;
 
-        public LoginController(IManagerRepository manager)
+        public LoginController(IManagerRepository manager,IManagerRoleRepository managerRole,IMenuRepository menu,IRolePermissionRepository rolePermission)
         {
             _manager = manager;
+            _managerRole = managerRole;
+            _menu = menu;
+            _rolePermission = rolePermission;
         }
         public IActionResult Index()
         {
@@ -55,7 +61,18 @@ namespace WebApi.Controllers
                 return Json("获取用户菜单权限失败，未获取到用户角色");
             }
 
-            return Json("");
+            //获取角色菜单权限的集合
+            var rolePermissions = _rolePermission.GetAllList(p => p.RoleId == HttpContext.Session.GetInt32("ManagerRole"));
+
+            //获取菜单Id列表
+            var menuIds = rolePermissions.Select(p => p.MenuId).ToList();
+
+            //获取菜单列表
+            var menus = _menu.GetAllList(p => menuIds.Contains(p.ID));
+
+
+
+            return Json(menus);
         }
     }
 }

@@ -4,59 +4,74 @@
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<div class="col-12">
-    <div class="card">
-        <div class="card-body">
-            <h4 class="card-title">表单列表</h4>
-            <div class="table-responsive">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>
-                                @Html.DisplayNameFor(model => model.FormName)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.StartDate)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.State)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.MId)
-                            </th>
-                            <th>操作</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var item in Model)
-                        {
-                            <tr>
-                                <td>
-                                    <a href="Detail?@item.ID"> @Html.DisplayFor(modelItem => item.FormName)</a>
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.StartDate)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.State)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.MId)
-                                </td>
-                                <td>
-                                    <a href="Edit?@item.ID" asp-action="Edit" data-toggle="tooltip" asp-route-id="@item.ID" data-original-title="修改"> <i class="fa fa-pencil text-inverse m-r-10"></i> </a> |
-                                    <a href="Detail?@item.ID" data-toggle="tooltip" data-original-title="详情"> <i class="fa fa-info-circle text-inverse m-r-10"></i></a> |
-                                    <a href="Delete?@item.ID" data-toggle="tooltip" data-original-title="删除"> <i class="fa fa-close text-danger m-r-10"></i></a>
-                                </td>
-                            </tr>
-                        }
-                    </tbody>
-                </table>
-            </div>
-        </div>
 
+<div class="row page-titles">
+    <div class="col-md-5 col-8 align-self-center">
+        <h3 class="text-themecolor m-b-0 m-t-0">活动列表</h3>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="javascript:void(0)">主页</a></li>
+            <li class="breadcrumb-item active">活动列表</li>
+        </ol>
     </div>
 </div>
 
+<div class="row">
 
 
+
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">表单列表</h4>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.FormName)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.StartDate)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.State)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.MId)
+                                </th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        <a href="Detail?@item.ID"> @Html.DisplayFor(modelItem => item.FormName)</a>
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.StartDate)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.State)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.MId)
+                                    </td>
+                                    <td>
+                                        <a href="Edit?@item.ID" asp-action="Edit" data-toggle="tooltip" asp-route-id="@item.ID" data-original-title="修改"> <i class="fa fa-pencil text-inverse m-r-10"></i> </a> |
+                                        <a href="Detail?@item.ID" data-toggle="tooltip" data-original-title="详情"> <i class="fa fa-info-circle text-inverse m-r-10"></i></a> |
+                                        <a href="Delete?@item.ID" data-toggle="tooltip" data-original-title="删除"> <i class="fa fa-close text-danger m-r-10"></i></a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+</div>

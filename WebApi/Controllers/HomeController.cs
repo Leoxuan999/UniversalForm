@@ -10,7 +10,7 @@ namespace WebApi.Controllers
     {
         public IActionResult Index()
         {
-            return Redirect("~/Login");
+            return Redirect("~/Form");
         }
     }
 }
