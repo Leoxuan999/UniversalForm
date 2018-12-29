@@ -45,34 +45,12 @@ namespace WebApi.Controllers
                 manager.LastLoginTime = DateTime.Now;
                 manager.LastLoginIP = Request.HttpContext.Connection.RemoteIpAddress.ToString();
                 HttpContext.Session.SetInt32("ManagerRole", manager.RoleId);
+                HttpContext.Session.SetString("NickName", manager.NickName);
                 return Redirect("~/Home");
             }
             return View("用户名或密码错误");
         }
 
-        /// <summary>
-        /// 获取用户菜单权限
-        /// </summary>
-        /// <returns></returns>
-        public IActionResult GetMenu()
-        {
-            if (HttpContext.Session.GetInt32("ManagerRole")==null)
-            {
-                return Json("获取用户菜单权限失败，未获取到用户角色");
-            }
-
-            //获取角色菜单权限的集合
-            var rolePermissions = _rolePermission.GetAllList(p => p.RoleId == HttpContext.Session.GetInt32("ManagerRole"));
-
-            //获取菜单Id列表
-            var menuIds = rolePermissions.Select(p => p.MenuId).ToList();
-
-            //获取菜单列表
-            var menus = _menu.GetAllList(p => menuIds.Contains(p.ID));
-
-
-
-            return Json(menus);
-        }
+        
     }
 }

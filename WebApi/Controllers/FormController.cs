@@ -7,7 +7,7 @@ using UniversalForm.Domain.IRepositories;
 
 namespace WebApi.Controllers
 {
-    public class FormController : Controller
+    public class FormController : FilterController
     {
         private readonly IFormRepository _form;
 

@@ -1,0 +1,118 @@
+﻿@model IEnumerable<WebApi.Model.Menu>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/assets/plugins/nestable/nestable.css" rel="stylesheet" />
+<style>
+    .dd3-handle:before {
+        color: #67757c;
+        top: 7px;
+    }
+</style>
+<div class="row page-titles">
+    <div class="col-md-5 col-8 align-self-center">
+        <h3 class="text-themecolor m-b-0 m-t-0">菜单管理</h3>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="javascript:void(0)">主页</a></li>
+            <li class="breadcrumb-item active">菜单管理</li>
+        </ol>
+    </div>
+</div>
+<div class="row">
+
+    <div class="col-lg-4 col-md-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">菜单管理</h4>
+                <div id="nestable-menu">
+                    <button type="button" data-action="expand-all" class="btn btn-white btn-sm btn-mini">全部展开</button>
+                    <button type="button" data-action="collapse-all" class="btn btn-white btn-sm btn-mini">收起全部</button>
+                </div>
+                <div class="myadmin-dd-empty dd" id="nestable">                    
+                        <ol class="dd-list">
+                            @foreach (var item in Model)
+                            {
+                                if (item.FatherId == 0)
+                                {
+                                    <li class="dd-item dd3-item" data-id="@item.ID">
+                                        <div class="dd-handle dd3-handle"></div>
+                                        <div class="dd3-content d-flex"><div class="read">@item.MenuName</div><div class="ml-auto"><a href="javascript:void(0)" class="link m-r-10 "><i class="fa fa-pencil text-inverse m-r-10"></i></a></div></div>
+
+                                        @if (item.ChildMenu.Count() > 0)
+                                        {
+                                            <ol class="dd-list">
+                                                @foreach (var childitem in item.ChildMenu)
+                                                {
+                                                <li class="dd-item dd3-item" data-id="@childitem.ID">
+                                                    <div class="dd-handle dd3-handle"></div>
+                                                    <div class="dd3-content d-flex"><div class="read">@childitem.MenuName</div>  <div class="ml-auto"><a href="javascript:void(0)" class="link m-r-10 "><i class="fa fa-pencil text-inverse m-r-10"></i></a></div></div>                                            
+                                                </li>
+                                                }
+                                            </ol>
+                                        }
+                                    </li>
+                                }
+                            }
+
+                        </ol>
+                    </div>
+                </div>
+            </div>
+    </div> 
+    
+    <div class="col-lg-8 col-md-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="card-title">添加菜单</div>
+                <form action="/Add" method="post">
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/assets/plugins/nestable/jquery.nestable.js"></script>
+<script type="text/javascript">
+    var treedata;
+    var clickdata;
+    $(document).ready(function () {         
+        var updateOutput = function (e) {
+            var list = e.length ? e : $(e.target),
+                output = list.data('output');
+            if (window.JSON) {
+                output.val(window.JSON.stringify(list.nestable('serialize'))); //, null, 2));
+            } else {
+                output.val('JSON browser support required for this demo.');
+            }
+            treedata = output;
+            console.log(output);
+        };
+
+        $('#nestable').nestable({
+            //group: 1
+        }).on('change', updateOutput);
+
+        updateOutput($('#nestable').data('output', $('#nestable')));
+
+        $('#nestable-menu').on('click', function (e) {
+            var target = $(e.target),
+                action = target.data('action');
+            if (action === 'expand-all') {
+                $('.dd').nestable('expandAll');
+            }
+            if (action === 'collapse-all') {
+                $('.dd').nestable('collapseAll');
+            }
+        });
+
+        $("#nestable .dd3-content").on("click", function (e) {
+            console.log($(this).parent().attr("data-id"));
+        })
+
+        
+    });
+</script>
+

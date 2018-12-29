@@ -11,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Swashbuckle.AspNetCore.Swagger;
 using UniversalForm.Domain.IRepositories;
 using UniversalForm.EF.Repositories;
+using WebApi.Common;
 
 namespace WebApi
 {
@@ -19,6 +20,9 @@ namespace WebApi
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+
+            //初始化映射关系
+            UniversalFormMapper.Initialize();
         }
 
         public IConfiguration Configuration { get; }
